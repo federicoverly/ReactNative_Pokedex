@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {RootStackParams} from '../navigation/StackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -21,7 +22,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
   const {top} = useSafeAreaInsets();
   const {isLoading, pokemon} = usePokemon(simplePokemon.id);
   return (
-    <View>
+    <ScrollView>
       <View
         style={{
           ...screenStyles.headerContainer,
@@ -60,7 +61,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
       ) : (
         <PokemonDetails pokemon={pokemon} />
       )}
-    </View>
+    </ScrollView>
   );
 };
 
