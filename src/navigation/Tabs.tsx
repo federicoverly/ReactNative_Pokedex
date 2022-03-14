@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StackNavigator, Tabs1} from './Tabs1';
+import {Tabs1} from './Tabs1';
 import {Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Tab2Screen} from './Tabs2';
