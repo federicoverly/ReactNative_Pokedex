@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Platform,
   View,
@@ -22,6 +22,26 @@ export const SearchScreen = () => {
 
   const {isFetching, simplePokemonList} = usePokemonSearch();
 
+  const [term, setTerm] = useState('');
+  const [filteredPokemons, setFilteredPokemons] = useState<SimplePokemon[]>([]);
+
+  useEffect(() => {
+    if (term.length === 0) {
+      return setFilteredPokemons([]);
+    }
+    if (isNaN(Number(term))) {
+      setFilteredPokemons(
+        simplePokemonList.filter(pokemon =>
+          pokemon.name.toLowerCase().includes(term.toLowerCase()),
+        ),
+      );
+    } else {
+      setFilteredPokemons([
+        simplePokemonList.find(pokemon => pokemon.id === term),
+      ]);
+    }
+  }, [term]);
+
   const renderItem = (item: SimplePokemon) => {
     return <PokemonCard pokemon={item} />;
   };
@@ -36,6 +56,7 @@ export const SearchScreen = () => {
         marginHorizontal: 20,
       }}>
       <SearchInput
+        onDebounce={value => setTerm(value)}
         style={{
           position: 'absolute',
           zIndex: 999,
@@ -44,7 +65,7 @@ export const SearchScreen = () => {
         }}
       />
       <FlatList
-        data={simplePokemonList}
+        data={filteredPokemons}
         keyExtractor={pokemon => pokemon.id}
         renderItem={({item}) => renderItem(item)}
         ListHeaderComponent={
@@ -55,7 +76,7 @@ export const SearchScreen = () => {
               paddingBottom: 10,
               marginTop: Platform.OS === 'ios' ? top + 60 : top + 80,
             }}>
-            Pokedex
+            {term}
           </Text>
         }
         numColumns={2}
