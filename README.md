@@ -35,3 +35,7 @@ Axios is used to handle the api request to the Pokeapi. Make sure to check [Axio
 ### React Native Image Colors
 
 Super interesting library to fetch the prominent colors of an image. Used here to change the background depending on the Pokemon. Take a look [here](https://npmmirror.com/package/react-native-image-colors)
+
+### React Native Linear Gradient
+
+The library is used to generate a gradient from the main colors of the movie. [Here](https://github.com/react-native-linear-gradient/react-native-linear-gradient) for more.
